@@ -66,6 +66,8 @@ interface PlaceRes {
   pid: number
   aid: number
   price: number
+  title: string
+  sale_text: Record<string, string>
   content: Record<string, string>
   timeline: Record<string, Record<number, boolean>>
 }
@@ -139,9 +141,13 @@ interface StoreRes {
       item[aid] ??= { aid, tips: {}, title, place: {} }
       item[aid].tips[nowDateTime] = tips
 
-      place.forEach(({ aid, content, date_title, pid, price, sale_text, sid, tags, timeline, title }) => {
-        item[aid].place[pid] ??= { aid, content: {}, pid, price, sid, timeline: {} }
+      place.forEach(({ aid, content, pid, price, sale_text, sid, timeline, title }) => {
+        item[aid].place[pid] ??= { aid, content: {}, pid, price, sid, timeline: {}, title, sale_text: {} }
+        item[aid].place[pid].content ??= {}
+        item[aid].place[pid].sale_text ??= {}
+        
         item[aid].place[pid].content[nowDateTime] = content
+        item[aid].place[pid].sale_text[nowDateTime] = sale_text
 
         let today = dayjs().format('YYYY-MM-DD')
 
@@ -169,7 +175,7 @@ interface StoreRes {
 
   fs.writeFile(
     'data.json',
-    JSON.stringify(collect, 
+    JSON.stringify(collect,
       null,
       2
     )
