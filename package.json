@@ -1,0 +1,19 @@
+{
+  "name": "Fetch 5laoban",
+  "type": "module",
+  "version": "0.0.0",
+  "packageManager": "pnpm@9.9.0",
+  "scripts": {
+    "start": "esno src/index.ts"
+  },
+  "devDependencies": {
+    "@types/crypto-js": "^4.2.2",
+    "@types/node": "^22.5.4",
+    "crypto-js": "^4.2.0",
+    "dayjs": "^1.11.13",
+    "esno": "^4.7.0",
+    "node-fetch": "^3.3.2",
+    "pnpm": "^9.9.0",
+    "typescript": "^5.5.4"
+  }
+}
