@@ -33,4 +33,4 @@ jobs:
           message: 'chore: fetch 5laoban data [ci skip]'
           add: "data.json"
         env:
-          GITHUB_TOKEN: ${{ secrets.WuLaobanBot }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
