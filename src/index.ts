@@ -1,4 +1,6 @@
 import dayjs from 'dayjs'
+import timezone from 'dayjs/plugin/timezone'
+import utc from 'dayjs/plugin/utc'
 import fetch, { FormData } from 'node-fetch'
 
 import { genAppletToken } from './token'
@@ -7,6 +9,14 @@ import { Area, City, Resp, Store } from './type'
 import cacheJson from '../data.json'
 
 import fs from 'fs/promises'
+
+import { env } from 'node:process'
+env.TZ = 'Asia/Shanghai'
+
+dayjs.extend(utc)
+dayjs.extend(timezone)
+dayjs.tz.setDefault('Asia/Shanghai')
+dayjs.tz()
 
 const BASE_URL = 'https://api.5laoban.com'
 async function getStoreList() {
@@ -130,7 +140,7 @@ interface StoreRes {
     return [sid, result] as const
   }))
 
-  const nowDateTime = dayjs().format('YYYY-MM-DD hh:mm')
+  const nowDateTime = dayjs().format('YYYY-MM-DD HH:mm')
 
   const areaAll = areaResultAll.filter(([_, { code }]) => code == 100)
     .map(([sid, { result }]) => [sid, result.area] as const)
